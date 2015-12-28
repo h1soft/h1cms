@@ -1,0 +1,11 @@
+{
+    "repositories": [
+        {
+            "url": "https://github.com/h1soft/hmvc.git",
+            "type": "git"
+        }
+    ],
+    "require": {
+        "hmvc/framework": "dev-master"
+    }
+}
