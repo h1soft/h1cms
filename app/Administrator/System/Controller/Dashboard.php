@@ -29,22 +29,20 @@
 
  */
 
-namespace App\Backend\Admin\Entity;
+namespace App\Administrator\System\Controller;
+
+use hmvc\Routing\Controller;
+use hmvc\View\View;
 
 /**
- * Description of Hello
+ * Dashboard
  *
- * @author Administrator
+ * @author allen <allen@w4u.cn>
  */
-class Hello extends \hmvc\Database\Model {
+class Dashboard extends Controller {
 
-    protected $table = 'hello';
-    protected $primaryKey = 'Id';
-
-//    public $name;
-//    public $Id;
-    public function __toString() {
-        return $this->toXML();
+    public function index() {
+        return View::make('admin/dashboard');
     }
 
 }

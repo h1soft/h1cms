@@ -32,6 +32,6 @@
 use hmvc\Http\Route;
 
 Route::scope('/administrator', array(
-    'namespace' => 'App\Backend',
-    'module' => 'admin',
+    'namespace' => 'App\Administrator',
+    'module' => 'system',
 ));

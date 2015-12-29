@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b56a67f8e383e783bb3d8c699b44adf9",
-    "content-hash": "f071fbfa2f10660106a8c61483ecf0b7",
+    "hash": "ca257bb450ebd23b307207a3e1cf9a26",
+    "content-hash": "dd072fe30eab17f4e5a11db3febdb6c0",
     "packages": [
         {
             "name": "hmvc/framework",
@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/h1soft/hmvc.git",
-                "reference": "beea293f7e60e8c196ce443b5e02c6e2c06fb3b2"
+                "reference": "9ee1dda90a2aef65f632b85289a820276a867abf"
             },
             "require": {
                 "ext-mbstring": "*",
@@ -42,7 +42,7 @@
                 "framework",
                 "hmvc"
             ],
-            "time": "2015-12-28 14:53:47"
+            "time": "2015-12-29 16:39:21"
         },
         {
             "name": "symfony/http-foundation",

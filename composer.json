@@ -3,6 +3,13 @@
         {
             "url": "https://github.com/h1soft/hmvc.git",
             "type": "git"
+        },
+        {
+            "type": "composer",
+            "url": "http://packagist.phpcomposer.com"
+        },
+        {
+            "packagist": false
         }
     ],
     "require": {

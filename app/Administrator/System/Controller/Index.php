@@ -29,37 +29,24 @@
 
  */
 
-namespace App\Backend\Admin\Controller;
+namespace App\Administrator\System\Controller;
 
 use hmvc\Routing\Controller;
+use App\Foundation\Acl;
+use hmvc\Helpers\Redirect;
 
 /**
- * Description of Hello
+ * Index default page
  *
- * @author Administrator
+ * @author allen <allen@w4u.cn>
  */
 class Index extends Controller {
 
-    public function __construct() {
-        parent::__construct();
-    }
-
     public function index() {
-        $p = new \hmvc\Component\Paginator($this->request->get('page', 1), $this->request->get('limit', 20));
-        $p->setTotal(2000);
-        $p->setData($this->request->query->all());
-        return \hmvc\View\View::make('admin/hello', array(
-                    'page' => $p->makeHtml(5)
-        ));
-    }
-
-    public function show($id) {
-        
-    }
-
-    public function save() {
-        echo 'save';
-//        echo $this->request->getPathInfo();
+        if (Acl::isLogin()) {
+            return Redirect::action('dashboard');
+        }
+        return Redirect::action('login');
     }
 
 }

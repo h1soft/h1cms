@@ -31,13 +31,20 @@
 
 namespace App;
 
+use hmvc\Database\Model;
+use hmvc\Database\DB;
+
 /**
- * Description of Router
+ * 系统用户管理
  *
- * @author Administrator
+ * @author allen <allen@w4u.cn>
  */
-class Router {
-    public function __construct() {
-        
+class User extends Model {
+
+    protected $table = 'users';
+
+    public static function findByEmail($email) {
+        return DB::table('users')->where('email', $email)->first();
     }
+
 }

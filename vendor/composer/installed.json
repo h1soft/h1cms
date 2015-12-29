@@ -121,7 +121,7 @@
         "source": {
             "type": "git",
             "url": "https://github.com/h1soft/hmvc.git",
-            "reference": "beea293f7e60e8c196ce443b5e02c6e2c06fb3b2"
+            "reference": "9ee1dda90a2aef65f632b85289a820276a867abf"
         },
         "require": {
             "ext-mbstring": "*",
@@ -129,7 +129,7 @@
             "php": ">=5.3.0",
             "symfony/http-foundation": "*"
         },
-        "time": "2015-12-28 14:50:53",
+        "time": "2015-12-29 16:39:21",
         "type": "library",
         "installation-source": "source",
         "autoload": {
