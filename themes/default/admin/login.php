@@ -17,11 +17,7 @@
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
                         <i class="icon-reorder shaded"></i>
                     </a>
-
-                    <a class="brand" href="index.html">
-                        H1CMS
-                    </a>
-
+                    <a class="brand" href="">H1CMS</a>
                 </div>
             </div><!-- /navbar-inner -->
         </div><!-- /navbar -->

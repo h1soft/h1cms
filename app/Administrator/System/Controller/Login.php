@@ -36,6 +36,7 @@ use hmvc\View\View;
 use hmvc\Core\Config;
 use hmvc\Helpers\Redirect;
 use hmvc\Session\Session;
+use hmvc\Validation\Validator;
 
 /**
  * Admin login
@@ -54,7 +55,7 @@ class Login extends Controller {
     }
 
     public function save(Session $session) {
-        $validator = \hmvc\Validation\Validator::make($this->request->request->all());
+        $validator = Validator::make($this->request->request->all());
         $validator->addRule('email', 'required|email', array(
             'required' => '用户名必须填写',
             'email' => '必须填写合法的Email'
@@ -67,7 +68,7 @@ class Login extends Controller {
             foreach ($validator->errors() as $value) {
                 $session->addFlash('error', $value);
             }
-            return Redirect::action('login');
+            return Redirect::action('system/login');
         }
 
 
@@ -75,10 +76,10 @@ class Login extends Controller {
         $email = $this->request->get('email');
         $password = $this->request->get('password');
         if ($email && $password) {
-            
+            $session->set('_h1cms_user', $email);
         }
         //check user
-        return Redirect::action('dashborad')->with('success', '登录成功');
+        return Redirect::action('system/dashboard')->with('success', '登录成功');
     }
 
 }

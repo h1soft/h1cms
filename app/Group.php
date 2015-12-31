@@ -32,20 +32,15 @@
 namespace App;
 
 use hmvc\Database\Model;
-use hmvc\Database\DB;
 
 /**
  * 系统用户管理
  *
  * @author allen <allen@w4u.cn>
  */
-class User extends Model {
+class Group extends Model {
 
-    protected $table = 'users';
-    protected $primaryKey = 'id';
-
-    public static function findByEmail($email) {
-        return DB::table('users')->where('email', $email)->first();
-    }
+    protected $primaryKey = 'group_id';
+    protected $table = 'usergroups';
 
 }

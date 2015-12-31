@@ -29,7 +29,7 @@
 
  */
 
-namespace app\Foundation;
+namespace App\Foundation;
 
 /**
  * Package app\Foundation  

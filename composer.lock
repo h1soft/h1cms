@@ -13,7 +13,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/h1soft/hmvc.git",
-                "reference": "9ee1dda90a2aef65f632b85289a820276a867abf"
+                "reference": "a9660eea8c54dcdd3db83d679c62e027eb93bc40"
             },
             "require": {
                 "ext-mbstring": "*",
@@ -42,7 +42,7 @@
                 "framework",
                 "hmvc"
             ],
-            "time": "2015-12-29 16:39:21"
+            "time": "2015-12-31 09:22:08"
         },
         {
             "name": "symfony/http-foundation",

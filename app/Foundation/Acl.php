@@ -45,7 +45,11 @@ class Acl {
     }
 
     public static function isLogin() {
-        return app()->get('session')->get('_h1cms_user', NULL);
+        return app()->get('session')->get('_h1cms_user', false);
+    }
+
+    public static function logout() {
+        return app()->get('session')->remove('_h1cms_user');
     }
 
 }

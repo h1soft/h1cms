@@ -31,7 +31,7 @@
 
 namespace App\Administrator\System\Controller;
 
-use hmvc\Routing\Controller;
+use App\Administrator\Controller;
 use hmvc\View\View;
 
 /**

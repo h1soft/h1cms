@@ -10,14 +10,6 @@ return array(
             'username' => 'root',
             'password' => 'root',
             'prefix' => 'hmvc_'
-        ),
-        'test' => array(
-            'driver' => 'mysql',
-            'host' => '127.0.0.1',
-            'database' => 'test',
-            'username' => 'root',
-            'password' => 'root',
-            'prefix' => ''
         )
     )
 );

@@ -29,23 +29,25 @@
 
  */
 
-namespace App\Administrator\System;
+namespace App\Administrator;
 
-use hmvc\Component\Acl\Resource;
+use hmvc\Routing\Controller as BaseController;
+use hmvc\Helpers\Redirect;
 
 /**
- * Package App\Administrator\System  Acl
+ * Package App\Administrator  
+ * 
+ * Class Controller
  *
  * @author allen <allen@w4u.cn>
  */
-class Acl extends Resource {
+class Controller extends BaseController {
 
-    public $module = 'system';
-    public $name = '系统模块';
-
-    protected function initialize() {
-        $this->addResource('user', '系统用户');
-        $this->addResource('group', '用户组');
+    public function init() {
+        if (!$this->session->get('_h1cms_user', false)) {
+            Redirect::action('system/login')->send();
+            exit();
+        }
     }
 
 }
