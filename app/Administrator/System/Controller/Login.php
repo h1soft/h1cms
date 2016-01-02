@@ -70,16 +70,16 @@ class Login extends Controller {
             }
             return Redirect::action('system/login');
         }
-
-
-
         $email = $this->request->get('email');
         $password = $this->request->get('password');
-        if ($email && $password) {
-            $session->set('_h1cms_user', $email);
+        $user = \App\User::findByEmail($email);
+        if ($user != NULL && \App\Foundation\Security::checkPassword($password, $user->password)) {
+            $session->set('_h1cms_user_id', $user->id);
+            $session->set('_h1cms_user_email', $email);
+            return Redirect::action('system/dashboard')->with('success', '登录成功');
+        } else {
+            return Redirect::action('system/login')->with('error', '登录失败');
         }
-        //check user
-        return Redirect::action('system/dashboard')->with('success', '登录成功');
     }
 
 }

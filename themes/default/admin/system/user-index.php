@@ -33,6 +33,7 @@
                                         <th>用户组</th>
                                         <th>姓名</th>
                                         <th>注册时间</th>
+                                        <th>#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,7 +43,9 @@
                                             <td><?php echo $user->email; ?></td>
                                             <td><?php echo $user->group_name; ?></td>
                                             <td><?php echo $user->fullname; ?></td>
-                                            <td><?php echo $user->created_at; ?></td>
+                                            <td><?php echo date('Y-m-d', $user->created_at); ?></td>
+                                            <td><a class="btn btn-mini btn-success" href="<?php echo url_for('system/user/edit', $user->id); ?>">编辑</a>
+                                                <a class="btn btn-mini btn-danger" onclick="RESTDelete('<?php echo url_for('system/user', $user->id) ?>', {token: token}, '确定要删除此用户组【<?php echo addslashes($user->email); ?>】 吗?');">删除</a></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

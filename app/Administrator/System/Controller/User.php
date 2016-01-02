@@ -109,12 +109,66 @@ class User extends Controller {
         if (empty($user)) {
             return Redirect::action('system/user')->with('error', '添加失败');
         }
-        
+
         return Redirect::action('system/user')->with('success', '用户' . $user->email . '添加成功');
     }
 
-    public function show($id) {
-        
+    public function edit($id) {
+        if (!$id) {
+            return Redirect::action('system/user')->with('error', '用户不存在');
+        }
+        $user = \App\User::find($id);
+        if (empty($user)) {
+            return Redirect::action('system/user')->with('error', '用户不存在');
+        }
+        $view = View::make('admin/system/user-edit');
+        $view->system_manager = true;
+        $view->groups = \App\Group::findAll();
+        $view->token = Security::getToken($id);
+        $view->user = $user;
+        return $view;
+    }
+
+    public function update($id) {
+        if (!$id) {
+            return Redirect::action('system/user')->with('error', '用户不存在');
+        }
+        if (!Security::checkToken($id,true)) {
+            return Redirect::action('system/user')->with('error', 'token is invalid');
+        }
+        $validator = Validator::make($this->request->request->all());
+        $validator->addRule('group_id', 'required', array(
+            'required' => '必须选择用户组',
+        ));
+        $validator->addRule('email', 'required|email', array(
+            'required' => '用户名必须填写', 'email' => '请输入正确的Email'
+        ));
+        $validator->addRule('password', 'same_as[repassword]|len[6,16]', array(
+            'len' => '密码长度必须在6-16个字符', 'same_as' => '两次输入的密码不同'
+        ));
+        $user = \App\User::find($id);
+        if ($user == NULL) {
+            return Redirect::action('system/user')->with('error', '用户不存在');
+        }
+        if ($this->request->get('email') != $user->email && \App\User::findByEmail($this->request->get('email'))) {
+            $validator->addError('email', '用户名已经存在');
+        } else {
+            $user->email = $this->request->get('email');
+        }
+        if (!$validator->validate()) {
+            foreach ($validator->errors() as $value) {
+                $this->session->addFlash('error', $value);
+            }
+            return Redirect::action('system/user/edit', $id);
+        }
+        if ($this->request->get('password')) {
+            $user->password = Security::password($this->request->get('password'));
+        }
+        $user->group_id = $this->request->get('group_id');
+        $user->fullname = $this->request->get('fullname');
+        $user->description = $this->request->get('description');
+        $user->save();
+        return Redirect::action('system/user')->with('success', '用户' . $user->email . '修改成功');
     }
 
     /**

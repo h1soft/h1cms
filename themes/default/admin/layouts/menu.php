@@ -18,7 +18,7 @@
                     </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
                     </i>系统管理 </a>
                 <ul id="system_manager" class="<?php echo $system_manager ? 'collapsed' : 'collapse'; ?> unstyled">
-                    <li><a href="<?php echo url_for('system/settings'); ?>"><i class="icon-cog"></i>系统设置 </a></li>
+                    <li><a href="<?php echo url_for('system/setting'); ?>"><i class="icon-cog"></i>系统设置 </a></li>
                     <li><a href="<?php echo url_for('system/group'); ?>"><i class="icon-user"></i>用户组管理 </a></li>
                     <li><a href="<?php echo url_for('system/user'); ?>"><i class="icon-user"></i>用户管理 </a></li>
                 </ul>

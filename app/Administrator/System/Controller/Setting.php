@@ -1,0 +1,72 @@
+<?php
+
+/*
+ * Copyright (C) 2014 Allen Niu <h@h1soft.net>
+
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+
+
+ * This file is part of the hmvc package.
+ * (w) http://www.hmvc.cn
+ * (c) Allen Niu <h@h1soft.net>
+
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+
+
+ */
+
+namespace App\Administrator\System\Controller;
+
+use App\Administrator\Controller;
+use hmvc\View\View;
+use hmvc\Component\Paginator;
+use hmvc\Database\DB;
+use hmvc\Validation\Validator;
+use hmvc\Helpers\Redirect;
+use App\Foundation\Security;
+use hmvc\Http\JsonResponse;
+
+/**
+ * Package App\Administrator\System\Controller  
+ * 
+ * Class Group
+ *
+ * @author allen <allen@w4u.cn>
+ */
+class Setting extends Controller {
+
+    public function index() {
+//        $this->setting->addGroup('system', '网站设置', 2);
+        $data['setting_tabs'] = $this->setting->get('_sys_settingtabs');
+//        $data['settings'] = $this->setting->getAll();
+        $data['token'] = Security::getToken();
+        $data['system_manager'] = true;
+        return View::make('admin/system/setting', $data);
+    }
+
+    public function save() {
+        if (!Security::checkToken(NULL, true)) {
+            return Redirect::action('system/setting')->with('error', 'token is invalid');
+        }
+        $config_items = $this->setting->get('_sys_settingtabs');
+        foreach (array_keys($config_items) as $item) {
+            $this->setting->save($item, $this->request->request->get($item));
+        }
+        return Redirect::action('system/setting')->with('success', '系统设置已更新');
+    }
+
+}

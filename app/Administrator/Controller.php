@@ -33,6 +33,8 @@ namespace App\Administrator;
 
 use hmvc\Routing\Controller as BaseController;
 use hmvc\Helpers\Redirect;
+use hmvc\Core\Config;
+use hmvc\Core\Definition;
 
 /**
  * Package App\Administrator  
@@ -48,6 +50,7 @@ class Controller extends BaseController {
             Redirect::action('system/login')->send();
             exit();
         }
+        Config::set('view.default', 'default');
     }
 
 }

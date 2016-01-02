@@ -32,25 +32,41 @@
 namespace App\Foundation;
 
 /**
- * Package app\Foundation  
+ * Package App\Foundation  
  * 
- * Class Acl
+ * Class Form
  *
  * @author allen <allen@w4u.cn>
  */
-class Acl {
+class Form {
 
     public function __construct() {
         
     }
 
-    public static function isLogin() {
-        return app()->get('session')->get('_h1cms_user_id', false);
+    public static function token($fixValue = '', $isFlash = false) {
+        return Security::getToken($fixValue, $isFlash);
     }
 
-    public static function logout() {
-        app()->get('session')->remove('_h1cms_user_id');
-        return app()->get('session')->remove('_h1cms_user_email');
+    public static function open($action, $name = 'appForm', $method = 'GET', $params = array()) {
+        $other_method = (strtoupper($method) != 'GET' && strtoupper($method) != 'POST');
+        echo '<form name="', $name, '" id="', $name, '" ';
+        echo ' action="', $action, '" ';
+        echo 'method="', ($other_method ? 'POST' : $method) . '" >', "\n";
+        if ($other_method) {
+            echo '<input name="_method" type="hidden" value="', $method, '" />', "\n";
+        }
+        if (isset($params['flashToken'])) {
+            $token = Security::getToken($params['flashToken'], true);
+            echo '<input name="token" type="hidden" value="', $token, '" />', "\n";
+        } else if (isset($params['token'])) {
+            $token = Security::getToken($params['token']);
+            echo '<input name="_method" type="hidden" value="', $token, '" />', "\n";
+        }
+    }
+
+    public static function end() {
+        echo '</form>';
     }
 
 }

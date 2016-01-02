@@ -42,7 +42,7 @@ use hmvc\View\View;
 class Dashboard extends Controller {
 
     public function index() {
-        return View::make('admin/dashboard');
+        return View::make('admin/system/dashboard');
     }
 
 }

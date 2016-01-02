@@ -32,25 +32,30 @@
 namespace App\Foundation;
 
 /**
- * Package app\Foundation  
+ * Package App\Foundation  
  * 
- * Class Acl
+ * Class Html
  *
  * @author allen <allen@w4u.cn>
  */
-class Acl {
+class Html {
 
     public function __construct() {
         
     }
 
-    public static function isLogin() {
-        return app()->get('session')->get('_h1cms_user_id', false);
-    }
-
-    public static function logout() {
-        app()->get('session')->remove('_h1cms_user_id');
-        return app()->get('session')->remove('_h1cms_user_email');
+    public static function options($options, $key = NULL, $value = NULL, $selected = NULL) {
+        if ($key == NULL) {
+            $key = 'id';
+        }
+        if ($value == NULL) {
+            $value = 'name';
+        }
+        foreach ($options as $option) {
+            echo '<option value="', $option[$key], '"';
+            echo $selected == $option[$key] ? ' selected="selected" ' : '';
+            echo ' >', $option[$value], '</option>';
+        }
     }
 
 }

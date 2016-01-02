@@ -61,24 +61,20 @@ class Security {
         return ($hash == self::password($password));
     }
 
-    public static function getToken($fixValue = '', $isFlash = false) {
+    public static function getToken($fixValue = NULL) {
         $salt = mt_rand();
         $token = hash('sha1', Config::get('security.key', 'h1cms') . $fixValue . $salt);
         app()->get('session')->set('security.csrf.slat', $salt);
-        if ($isFlash) {
-            app()->get('session')->addFlash('security.csrf.token', $token);
-        } else {
-            app()->get('session')->set('security.csrf.token', $token);
-        }
+        app()->get('session')->set('security.csrf.token', $token);
         return $token;
     }
 
-    public static function checkToken($fixValue = '') {
+    public static function checkToken($fixValue = NULL, $isFlash = false) {
         $salt = app()->get('session')->get('security.csrf.slat');
         $token = app()->get('session')->get('security.csrf.token');
-        if (empty($token)) {
-            $tokens = app()->get('session')->getFlash('security.csrf.token');
-            $token = array_get($tokens, 0, NULL);
+        if ($isFlash) {
+            app()->get('session')->remove('security.csrf.slat');
+            app()->get('session')->remove('security.csrf.token');
         }
         return hash('sha1', Config::get('security.key', 'h1cms') . $fixValue . $salt) == $token;
     }
