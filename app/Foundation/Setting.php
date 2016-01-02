@@ -55,7 +55,7 @@ class Setting {
         if ($group) {
             $group = " WHERE " . $this->db->quoteColumn('group') . "='$group'";
         }
-        return $this->db->query("select * from {setting} " . $group . ' order by sort_order asc');
+        return $this->db->getAll("select * from {setting} " . $group . ' order by sort_order asc');
     }
 
     public function addGroup($name, $title, $sort_order = 0) {
@@ -85,7 +85,7 @@ class Setting {
      * @return \App\Foundation\Setting
      */
     public function load($group_name) {
-        $settings = $this->db->query("select * from {setting} where {$this->db->quoteColumn('group')}=:group_name order by sort_order asc", array('group_name' => $group_name));
+        $settings = $this->db->getAll("select * from {setting} where {$this->db->quoteColumn('group')}=:group_name order by sort_order asc", array('group_name' => $group_name));
         foreach ($settings as $value) {
             $this->setting[$value['group']][$value['key']] = $value['value'];
         }
@@ -131,7 +131,7 @@ class Setting {
         if (!is_array($config)) {
             return false;
         }
-        $settings_rs = $this->db->query("select * from {setting} where {$this->db->quoteColumn('group')}=:group_name", array('group_name' => $group));
+        $settings_rs = $this->db->getAll("select * from {setting} where {$this->db->quoteColumn('group')}=:group_name", array('group_name' => $group));
         $settings = array();
         foreach ($settings_rs as $value) {
             $settings[$value['key']] = $value['value'];
