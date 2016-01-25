@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'hmvc\\' => array($vendorDir . '/hmvc/framework/src/hmvc'),
+    'Symfony\\Polyfill\\Php55\\' => array($vendorDir . '/symfony/polyfill-php55'),
     'Symfony\\Polyfill\\Php54\\' => array($vendorDir . '/symfony/polyfill-php54'),
     'Symfony\\Component\\HttpFoundation\\' => array($vendorDir . '/symfony/http-foundation'),
 );
